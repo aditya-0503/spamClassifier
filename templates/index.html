@@ -1,126 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Spam Classifier</title>
-        <!-- bootstrap-->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        
-        <!--Add custom CSS-->
-        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Classifier</title>
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
 
-        <!-- Add Font Awesome for icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+            <h2 class="mb-0">Spam Classifier</h2>
+        </div>
+    </nav>
 
-        <!-- Custom styles for the header -->
-         <style>
-            /*Header styling*/
-            .header {
-                background-color: #007bff; /*Blue  Background color*/
-                color: #fff; /*white text color*/
-                padding: 20px 0; /*Top and bottom padding*/
-            }
-
-            .header h1 {
-                font-size: 2.5rem; /*Larger font size*/
-                font-weight: bold; /*bold text*/
-            
-            }
-
-            .header p{
-                font-size: 1.25rem; /*larger font size for the description*/
-            }
-
-         </style>
-    </head>
-    <body>
-        <nav class = "navbar navbar-expand-lg navbar-light bg-light">
-            <h1>Spam Classifier</h1>
-        </nav>
-
-        <section class="header text-center">
-            <div class="container">
-                <div class="row align-items-centre">
-                    <div class="col-lg-6">
-                        <h1 class="display-4">Protecting Your Emails</h1>
-                        <p class="lead">Utilizing Advanced Machine Learning Algorithms</p>
-                        <a href="https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset" class="btn btn-secondary btn-lg">Learn More</a>
-                    </div>
+    <!-- Hero Header -->
+    <section class="header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 d-flex flex-column justify-content-center">
+                    <h1 class="display-4 font-weight-bold">Protecting Your Emails</h1>
+                    <p class="lead">Utilizing Advanced Machine Learning Algorithms</p>
+                    <a href="https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset" class="btn btn-secondary btn-lg mt-3">Learn More</a>
                 </div>
-                </div class="col-lg-6">
-                     <!-- Add an image or illustration here-->
-                      <img src="https://www.nyckel.com/assets/images/functions/emailspam.webp">
-                </div>
-            </div>
-        </section>
-
-        <!--Form section-->
-        <section class="form text-centre py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6-offset-lg-3">
-                        <h2 class="display-5">Let's Predict</h2>
-
-                        <!--Predict Button-->
-                        <fom method="POST" action="'/perdict">
-                            <div class="form-group">
-                                <label for="message" >Enter the message:</label>
-                                <textarea id="message" rows="4" cols="50" class="form-control" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-lg" name="action" value="predict">Predict</button>
-                        </fom>
-
-                        <!--Display Result-->
-                        {% if result is defined %}
-                            <div class="mt-3">
-                                <h3>Prediction Result:</h3>
-                                <p>{{ 'Spam' if result ==1 else 'Not Spam' }}</p>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Features Section -->
-<section id="features" class="features text-center py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="feature">
-                    <!-- Add a feature icon -->
-                    <i class="fas fa-shield-alt fa-4x mb-3"></i>
-                    <h3 class="h4">Security</h3>
-                    <p class="text-muted">Our system uses state-of-the-art machine learning algorithms to Classify the Spams.</p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="feature">
-                    <!-- Add a feature icon -->
-                    <i class="fas fa-lock fa-4x mb-3"></i>
-                    <h3 class="h4">Privacy</h3>
-                    <p class="text-muted">Your personal and financial information is kept safe and confidential.</p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="feature">
-                    <!-- Add a feature icon -->
-                    <i class="fas fa-globe fa-4x mb-3"></i>
-                    <h3 class="h4">Global Reach</h3>
-                    <p class="text-muted">We protect cardholders worldwide, ensuring peace of mind wherever you are.</p>
+                <div class="col-lg-6">
+                    <img src="https://www.nyckel.com/assets/images/functions/emailspam.webp" class="img-fluid" alt="Spam Email Classifier illustration">
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Footer -->
-<footer class="footer text-center py-3">
-    <div class="container">
-        <p class="text-muted">&copy; 2023 Master_Aditya. All rights reserved.</p>
-    </div>
-</footer>
+    <!-- Form Section -->
+    <section class="form-section text-center py-5">
+        <div class="container">
+            <h2 class="mb-4 font-weight-bold">Let's Predict</h2>
+            <form method="POST" action="/predict">
+                <div class="form-group">
+                    <label for="message">Enter the message:</label>
+                    <textarea id="message" name="message" rows="4" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg mt-3">Predict</button>
+            </form>
 
-<!-- Add Bootstrap JavaScript and any custom JavaScript scripts here -->
-    </body>
+            <!-- Display Result -->
+            {% if result is defined %}
+                <div class="mt-4">
+                    <h3>Prediction Result:</h3>
+                    <p class="lead font-weight-bold">
+                        {{ 'Spam' if result == 1 else 'Ham' }}
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features text-center py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <i class="fas fa-shield-alt fa-3x mb-3"></i>
+                    <h4 class="font-weight-bold">Security</h4>
+                    <p class="text-muted">Our system uses state-of-the-art machine learning algorithms to classify spam.</p>
+                </div>
+                <div class="col-lg-4">
+                    <i class="fas fa-lock fa-3x mb-3"></i>
+                    <h4 class="font-weight-bold">Privacy</h4>
+                    <p class="text-muted">Your personal and financial information is kept safe and confidential.</p>
+                </div>
+                <div class="col-lg-4">
+                    <i class="fas fa-globe fa-3x mb-3"></i>
+                    <h4 class="font-weight-bold">Global Reach</h4>
+                    <p class="text-muted">We protect users worldwide, ensuring peace of mind wherever you are.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-center py-3">
+        <div class="container">
+            <p class="text-muted mb-0">&copy; 2023 Master_Aditya. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
 </html>

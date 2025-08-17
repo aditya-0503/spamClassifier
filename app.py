@@ -15,7 +15,7 @@ nltk.download('stopwords')
 ps = PorterStemmer()
 
 def transform_text(message):
-    text = text.lower()
+    text = message.lower()
     text = nltk.word_tokenize(text)
 
     y = []
